@@ -23,4 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
+# vite
 .vit
+
+# env files
+.env
