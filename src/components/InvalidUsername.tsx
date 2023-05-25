@@ -1,4 +1,3 @@
-import React from 'react';
 import {useNavigate} from "react-router-dom";
 import EmptyState from "./EmptyState.tsx";
 import {InvalidUserEmptyState} from "../types/emptyState.ts";
