@@ -1,37 +1,56 @@
-import SearchBar from "../components/SearchBar.tsx";
-import {Stack, Paper, Skeleton, Avatar} from "@mui/material";
-import {useGetUserRepositories} from "../hooks/useGetRepositories.tsx";
-import {useGetUser} from "../hooks/useGetUser.tsx";
-import UserDetails from "../components/UserDetails.tsx";
-import {useParams} from "react-router-dom";
+import { useState } from 'react'
+import {ButtonGroup, Skeleton, Stack, Grid} from "@mui/material";
+import {useGetPopularRepositories} from "../hooks/useGetMostPopular.tsx";
 import UserRepository from "../components/UserRepository.tsx";
-import {useState} from "react";
+import Button from "@mui/material/Button";
+import HelpSearchModal from "../components/HelpSearchModal.tsx";
 
 const Home = () => {
-  const [resultsPerPage, setResultsPerPage] = useState(10)
-  const params = useParams();
-  const user = params?.userName
-  const { isLoading, isError, data} = useGetUserRepositories(user, 5)
-  const { data: userData } = useGetUser(user)
+  const [selectedLanguage, setSelectedLanguage] = useState('typescript')
+  const { isLoading, data} = useGetPopularRepositories(selectedLanguage)
+  const languageOptions = ["typescript", "javascript", "python", "golang"]
 
   const displaySkeleton = () => (
-      new Array(resultsPerPage).map(item =>
+      new Array(5).map(item =>
           <Skeleton key={item} variant="rectangular" width={500} height={150} />
       )
   )
 
-  const displayRepositories = () => (data?.data.map((repo, index) =>
-      <UserRepository key={index} {...repo} />))
+  const displayRepositories = () => {
+    return (
+        <>
+          {data && data.map((repo, index) => (
+              <UserRepository key={index} {...repo} />
+          ))}
+        </>
+    )
+  }
+
+  const handleLanguageClick = (lang: string) => {
+    setSelectedLanguage(lang)
+  }
+
+  const renderLanguageButtons = () => {
+      return (
+          <ButtonGroup sx={{display: "flex", flexDirection: "row", alignItems: "center", mb: "3 rem"}}>
+            {languageOptions.map((option, index) => (
+                <Button key={index} variant="contained" onClick={() => handleLanguageClick(option)}>{option}</Button>
+            ))}
+          </ButtonGroup>
+      )
+  }
 
   return (
       <Stack
-        direction="column"
-        justifyContent="center"
-        alignItems="center"
-        spacing={0.5}
-        sx={{mt: '5rem'}}
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          spacing={0.5}
+          sx={{mt: '2rem'}}
       >
-        <UserDetails userName={userData?.login} avatarUrl={userData?.avatar_url} url={userData?.html_url}/>
+        <HelpSearchModal />
+        <h3>Most Popular ({selectedLanguage})</h3>
+        {renderLanguageButtons()}
         {isLoading ? (
             displaySkeleton()
 
