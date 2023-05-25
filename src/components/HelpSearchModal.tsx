@@ -3,6 +3,7 @@ import {Modal} from "@mui/material";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import {useState} from 'react'
+import {Link} from "react-router-dom";
 
 
 const HelpSearchModal = () => {
@@ -12,7 +13,7 @@ const HelpSearchModal = () => {
 
   return (
       <Box sx={{mb: '2rem'}}>
-        <Button onClick={handleOpen}>Searching for Repositories</Button>
+        <Button onClick={handleOpen}>Searching for Repositories?</Button>
         <Modal
             open={open}
             onClose={handleClose}
@@ -26,15 +27,16 @@ const HelpSearchModal = () => {
             transform: 'translate(-50%, -50%)',
             backgroundColor: 'background.paper',
             border: '2px solid #000',
-            boxShadow: 20
+            boxShadow: 50
           }}
           >
             <Typography id="modal-modal-title" variant="h6" component="h2">
               Searching for User repositories
             </Typography>
             <Typography id="modal-modal-description" sx={{mt: 2}}>
-              Using the URL type in the desired User to view their respective GitHub repositories, ie:
-              http://localhost:8080/webpack
+              Type in the desired Username in the browser URL to view their respective GitHub repositories, ie:
+              <br/>
+              <Link to="/webpack" style={{ textDecoration: 'none', color: 'white' }}>http://localhost:8080/webpack</Link>
             </Typography>
           </Box>
         </Modal>
