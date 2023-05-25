@@ -38,7 +38,7 @@ function ResponsiveAppBar({changeTheme, isDarkTheme}: AppBarProps): JSX.Element 
           <Toolbar disableGutters>
 
             <Icon>
-              <img src={GithubIcon} alt="github icon" height={25} width={25}/>
+              <img src={GithubIcon} alt="github icon" height={25} width={25} data-testid="header-logo"/>
             </Icon>
 
             <Typography
@@ -56,6 +56,7 @@ function ResponsiveAppBar({changeTheme, isDarkTheme}: AppBarProps): JSX.Element 
                   color: 'inherit',
                   textDecoration: 'none',
                 }}
+                data-testid="header-h6-text"
             >
               Repository Search
             </Typography>
@@ -119,6 +120,7 @@ function ResponsiveAppBar({changeTheme, isDarkTheme}: AppBarProps): JSX.Element 
                       <Switch checked={isDarkTheme} onChange={changeTheme}/>
                     }
                     label="Dark Theme"
+                    data-testid="heading-theme-toggle"
                 />
               </FormGroup>
 
