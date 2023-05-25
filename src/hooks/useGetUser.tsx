@@ -1,9 +1,10 @@
 import {useQuery} from '@tanstack/react-query';
 import {GithubUser} from "../types/githubUser.ts";
 
-export const useGetUser = (username: string | undefined) => {
+export const useGetUser = (username: string) => {
   const tkn = import.meta.env.VITE_GITHUB_TOKEN
   const fetchUser = async (): Promise<GithubUser> => {
+
     const response = await fetch(`https://api.github.com/users/${username}`, {
       method: 'GET',
       headers: {

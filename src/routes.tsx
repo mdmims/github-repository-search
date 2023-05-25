@@ -3,7 +3,7 @@ import pageRoutes from "./utils/pageRoutes";
 import Home from "./pages/Home.tsx";
 import {validateGithubUsername} from "./utils/validateGithubUsername.ts";
 import InvalidUsername from "./components/InvalidUsername.tsx";
-import UserRepository from "./components/UserRepository.tsx";
+import User from "./pages/User.tsx";
 
 
 const ValidateUser = () => {
@@ -19,7 +19,7 @@ const ValidateUser = () => {
     return <InvalidUsername />;
   }
 
-  return <Home />;
+  return <User />;
 }
 
 
