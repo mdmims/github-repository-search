@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import "@fontsource/roboto";
 import {BrowserRouter as Router} from "react-router-dom";
 import {AppRoutes} from "./routes";
@@ -11,8 +11,16 @@ import {darkTheme, lightTheme} from "./utils/themes.ts";
 const App = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(true);
 
+  useEffect(() => {
+    const themeType = localStorage.getItem("themeSetting") || "dark";
+    if (themeType != "dark") {
+      setIsDarkTheme(!isDarkTheme);
+    }
+  }, [])
+
   const changeTheme = () => {
     setIsDarkTheme(!isDarkTheme);
+    localStorage.setItem("themeSetting", isDarkTheme ? "light" : "dark");
   };
 
   const HeaderProps = {
