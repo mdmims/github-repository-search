@@ -3,9 +3,10 @@ import {Card, CardActionArea, CardContent} from "@mui/material";
 import StarIcon from '@mui/icons-material/Star';
 import {GithubRepo} from "../types/githubRepo.ts";
 import {openInNewTab} from "../utils/openInNewTab.ts";
+import {useDocumentTitle} from "../hooks/useDocumentTitle.tsx";
 
 const UserRepository = ({name, description, stargazers_count, language, html_url}: Partial<GithubRepo>) => {
-
+  useDocumentTitle(`${name}`)
   return (
       <Card
           key={name}
