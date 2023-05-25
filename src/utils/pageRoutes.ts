@@ -4,4 +4,10 @@ export default class pageRoutes {
     path: '/',
     title: 'Home',
   };
+
+  static User = {
+    label: 'home',
+    path: '/:userName',
+    title: 'Home',
+  };
 }
