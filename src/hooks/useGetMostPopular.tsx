@@ -20,6 +20,7 @@ export const useGetPopularRepositories = (language: string) => {
         queryKey: ['PopularRepos', language],
         queryFn: fetchRepositories,
         staleTime: 1000 * 60, // do not automatically refetch for at least 1 minute
-        cacheTime: 1000 * 60 * 2 // cache responses for 2 minutes
+        cacheTime: 1000 * 60 * 2, // cache responses for 2 minutes
+        keepPreviousData: true,
       })
 };
