@@ -1,11 +1,13 @@
 import {useEffect, useState} from 'react';
+import {CssBaseline } from "@mui/material";
 import "@fontsource/roboto";
 import {BrowserRouter as Router} from "react-router-dom";
 import {AppRoutes} from "./routes";
 import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {CssBaseline } from "@mui/material";
 import ResponsiveHeader from "./components/ResponsiveHeader.tsx";
 import {darkTheme, lightTheme} from "./utils/themes.ts";
+import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
+import {ReactQueryDevtools} from "@tanstack/react-query-devtools";
 
 
 const App = () => {
@@ -28,14 +30,20 @@ const App = () => {
     isDarkTheme
   }
 
+  const queryClient = new QueryClient()
+
   return (
       <ThemeProvider theme={isDarkTheme ? createTheme(darkTheme) : createTheme(lightTheme)}>
+        <QueryClientProvider client={queryClient}>
         <CssBaseline />
         <Router>
           <ResponsiveHeader {...HeaderProps} />
           <AppRoutes />
         </Router>
-      </ThemeProvider>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </QueryClientProvider>
+        </ThemeProvider>
+
   )
 }
 
