@@ -5,19 +5,29 @@ import UserDetails from "../components/UserDetails.tsx";
 import {useParams} from "react-router-dom";
 import UserRepository from "../components/UserRepository.tsx";
 import {useState, Fragment} from "react";
+import {parseLinkHeader} from "../utils/parseGithubApiLink.ts";
+import PaginationLinks from "../components/PaginationLinks.tsx";
+import {useDocumentTitle} from "../hooks/useDocumentTitle.tsx";
 
-const Home = () => {
-  const [resultsPerPage, setResultsPerPage] = useState(10)
+const User = () => {
   const params = useParams();
   const user = params?.userName ?? ''
-  const { isLoading, data} = useGetUserRepositories(user , 5)
+  const address = `https://api.github.com/users/${user}/repos?page=1&per_page=5`
+  const [currentUrl, setCurrentUrl] = useState(address)
+  useDocumentTitle(user)
+  const { isLoading, data} = useGetUserRepositories(currentUrl)
   const { data: userData } = useGetUser(user)
+  const parsedPaginationLinks = parseLinkHeader(data?.headers ?? '')
 
   const displaySkeleton = () => (
-      new Array(resultsPerPage).map(item =>
+      new Array(5).map(item =>
           <Skeleton key={item} variant="rectangular" width={500} height={150} />
       )
   )
+
+  const handlePageChange = (changedUrl: string) => {
+    setCurrentUrl(changedUrl)
+  }
 
   const displayRepositories = () => {
     return (
@@ -25,8 +35,8 @@ const Home = () => {
           <UserDetails userName={userData?.login} avatarUrl={userData?.avatar_url} url={userData?.html_url}/>
           {data?.data.map((repo, index) => (
               <UserRepository key={index} {...repo} />
-          ))
-          }
+          ))}
+          <PaginationLinks links={parsedPaginationLinks} callback={handlePageChange}/>
         </Fragment>
     )
   }
@@ -49,4 +59,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default User;
