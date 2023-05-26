@@ -6,8 +6,8 @@ export default class pageRoutes {
   };
 
   static User = {
-    label: 'home',
+    label: 'user',
     path: '/:userName',
-    title: 'Home',
+    title: 'User',
   };
 }
