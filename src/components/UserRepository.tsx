@@ -19,7 +19,7 @@ const UserRepository = ({name, description, stargazers_count, language, html_url
             <Typography sx={{ fontSize: 18, fontWeight: 'bold' }} color="text.primary" gutterBottom>
               {name}
             </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            <Typography sx={{ mb: 1.5 }} color="text.secondary" component="span">
               <Box sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
                 <StarIcon /> {stargazers_count}
               </Box>
