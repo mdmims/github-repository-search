@@ -20,3 +20,7 @@ Tests are leveraging [Cypress](https://docs.cypress.io/guides/overview/why-cypre
   ```bash
   $ yarn cypress open
   ```
+  
+## Disclaimer
+Current application does not utilize a proper backend server to handle external data fetching with
+authentication. For Production usage a dedicated backend should be leveraged.
