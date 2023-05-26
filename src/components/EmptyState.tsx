@@ -7,7 +7,7 @@ const EmptyState = (props: EmptyStateProps) => {
 
   return (
       <div style={{display: 'flex', justifyContent: 'center', marginTop: '1rem'}}>
-        <Card sx={{maxWidth: 500, justifyContent: 'center'}}>
+        <Card sx={{maxWidth: 500, justifyContent: 'center'}} data-testid={props.testAttributeName}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {props.heading}

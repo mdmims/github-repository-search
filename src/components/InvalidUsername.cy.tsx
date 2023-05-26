@@ -1,10 +1,19 @@
-import React from 'react'
 import InvalidUsername from './InvalidUsername.tsx'
 import { mount } from '@cypress/react18'
+import {MemoryRouter, Route, Routes} from "react-router-dom";
 
 describe('<InvalidUsername />', () => {
+  before(() => {
+    mount(
+        <MemoryRouter initialEntries={['/']}>
+          <Routes>
+            <Route path='*' element={<InvalidUsername />} />
+          </Routes>
+        </MemoryRouter>
+    )
+  })
+
   it('renders', () => {
-    // see: https://on.cypress.io/mounting-react
-    mount(<InvalidUsername />)
+    cy.get('[data-testid="EmptyStateInvalidUsername"]').should('be.visible')
   })
 })
