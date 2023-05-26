@@ -7,6 +7,7 @@ Design philosophy and components leverage [Material UI](https://mui.com/)
 - Clone repository locally
 - `yarn install` to install all dependencies
 - Create `.env` file locally at root and add personal GitHub token
+  - [How to create personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
   - View [sample.env](sample.env) as an example for the variable `VITE_GITHUB_TOKEN`
 - `yarn run dev` to start the development server (vite)
 
