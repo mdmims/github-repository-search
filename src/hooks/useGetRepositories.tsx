@@ -3,7 +3,7 @@ import {GithubRepo} from "../types/githubRepo.ts";
 
 interface ResponseData {
   headers: string | null,
-  data: GithubRepo[]
+  data: GithubRepo[] | null
 }
 
 export const useGetUserRepositories = (url: string) => {
@@ -18,6 +18,11 @@ export const useGetUserRepositories = (url: string) => {
     });
     const data = await response.json()
     const link = response.headers.get('link')
+
+    if (response?.status === 404) {
+      return {headers: null, data: null}
+    }
+
     return {
       headers: link,
       data: data

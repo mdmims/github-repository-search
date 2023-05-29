@@ -8,6 +8,8 @@ import { useState, Fragment } from "react";
 import { parseLinkHeader } from "../utils/parseGithubApiLink.ts";
 import PaginationLinks from "../components/PaginationLinks.tsx";
 import { useDocumentTitle } from "../hooks/useDocumentTitle.tsx";
+import { UserNotFoundEmptyState } from "../types/emptyState.ts";
+import EmptyState from "../components/EmptyState.tsx";
 
 const User = () => {
   const params = useParams();
@@ -36,9 +38,10 @@ const User = () => {
           avatarUrl={userData?.avatar_url}
           url={userData?.html_url}
         />
-        {data?.data.map((repo, index) => (
-          <UserRepository key={index} {...repo} />
-        ))}
+        {data?.data &&
+          data?.data.map((repo, index) => (
+            <UserRepository key={index} {...repo} />
+          ))}
         <PaginationLinks
           links={parsedPaginationLinks}
           callback={handlePageChange}
@@ -55,7 +58,13 @@ const User = () => {
       spacing={0.5}
       sx={{ mt: "5rem" }}
     >
-      {isLoading && !userData ? displaySkeleton() : displayRepositories()}
+      {isLoading ? (
+        displaySkeleton()
+      ) : !userData?.id ? (
+        <EmptyState {...UserNotFoundEmptyState} />
+      ) : (
+        displayRepositories()
+      )}
     </Stack>
   );
 };

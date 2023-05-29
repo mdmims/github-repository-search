@@ -12,3 +12,9 @@ export const InvalidUserEmptyState: EmptyStateProps = {
   testAttributeName: 'EmptyStateInvalidUsername',
   buttonText: 'Go Back',
 }
+
+export const UserNotFoundEmptyState: EmptyStateProps = {
+  heading: 'User not found',
+  description: 'Unable to find requested GitHub User',
+  testAttributeName: 'EmptyStateUserNotFound',
+}
