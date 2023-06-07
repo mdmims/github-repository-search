@@ -14,7 +14,7 @@ import EmptyState from "../components/EmptyState.tsx";
 const User = () => {
   const params = useParams();
   const user = params?.userName ?? "";
-  const address = `https://api.github.com/users/${user}/repos?page=1&per_page=5`;
+  const address = `https://api.github.com/users/${user}/repos?page=1&per_page=5&sort=updated`;
   const [currentUrl, setCurrentUrl] = useState(address);
   useDocumentTitle(user);
   const { isLoading, data } = useGetUserRepositories(currentUrl);

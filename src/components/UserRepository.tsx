@@ -24,7 +24,7 @@ const UserRepository = ({name, description, stargazers_count, language, html_url
             </Typography>
           </Box>
 
-          <Typography sx={{ mb: 6 }}  color="text.secondary">
+          <Typography sx={{ mb: 6 }}  color="text.secondary" noWrap paragraph>
             {description}
           </Typography>
           <Typography color="#335789">
